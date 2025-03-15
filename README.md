@@ -4,7 +4,7 @@ This Spring Boot-based Java web application allows users to select a favorite so
 
 ## **Steps to set up the application and run it:**  
 
-### **Through a CI\CD Jenkins pipeline:**
+### **1. Through a CI\CD Jenkins pipeline:**
 
 #### **A visual overview of the CI\CD flow**
 
@@ -40,7 +40,7 @@ This Spring Boot-based Java web application allows users to select a favorite so
 
 #### **At this point the application is up and running**
 
-### **Through Terraform provisioning:**
+### **2. Through Terraform provisioning:**
 
 #### **We use the image that is stored in DockerHub** 
 
