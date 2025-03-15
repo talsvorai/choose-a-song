@@ -24,8 +24,7 @@ resource "aws_instance" "my_instance" {
 
   user_data = <<-EOF
               #!/bin/bash
-              # Update the instance and install Docker
-
+              # Onstall Docker
               sudo amazon-linux-extras install docker -y
               sudo service docker start
               sudo usermod -a -G docker ec2-user
@@ -40,8 +39,4 @@ resource "aws_instance" "my_instance" {
   tags = {
     Name = "MyEC2Instance"
   }
-}
-
-output "instance_public_ip" {
-  value = aws_instance.my_instance.public_ip
 }
