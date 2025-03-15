@@ -1,3 +1,10 @@
-"scripts": {
-  "test": "jest"
-}
+{
+    "name": "choose-a-song",
+    "version": "1.0.0",
+    "scripts": {
+      "test": "jest"
+    },
+    "dependencies": {
+      "jest": "^27.0.0"
+    }
+  }
