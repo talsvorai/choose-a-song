@@ -4,6 +4,7 @@ pipeline {
     environment {
         MAVEN_HOME = tool 'Maven' // Assumes Maven is installed and configured in Jenkins
         PATH = "${MAVEN_HOME}/bin:${env.PATH}" //Updating path to use maven
+        DOCKERHUB_CRED = credentials('dockerhub_cred')
     }
 
 
@@ -59,6 +60,11 @@ pipeline {
         stage('Docker Push') {
             steps {
                 script {
+
+                    // Login to Docker Hub using Jenkins credentials
+                    sh '''
+                    echo ${DOCKERHUB_CRED_PSW} | sudo docker login -u ${DOCKERHUB_CRED_USR} --password-stdin
+                    '''
 
                     echo "Pushing Docker image"
                     // Push the Docker image to Docker Hub
