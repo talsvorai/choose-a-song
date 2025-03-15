@@ -8,7 +8,7 @@ This Spring Boot-based Java web application allows users to select a favorite so
 
 #### **A visual overview of the CI\CD flow**
 
-![Pipeline Flow](images/pipeline_flow.png)
+![Pipeline Flow](images/pipeline-flow.png)
 
 #### **Create the source code**  
 1. Structure the code to support compilation and testing using Maven.
