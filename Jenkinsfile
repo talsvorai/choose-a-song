@@ -78,7 +78,7 @@ pipeline {
                     echo "Tagging the Docker image as 'latest'"
                     sh 'sudo docker tag ${DOCKERHUB_CRED_USR}/${APP_NAME}:artifact-${BUILD_NUMBER} ${DOCKERHUB_CRED_USR}/${APP_NAME}:latest'
 
-                    // Ppush the 'latest' tag to Docker Hub
+                    // Push the 'latest' tag to Docker Hub
                     sh 'sudo docker push ${DOCKERHUB_CRED_USR}/${APP_NAME}:latest'
                 }
             }
