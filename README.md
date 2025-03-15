@@ -45,7 +45,7 @@ This is a web application that runs via the internet.
 3. Set the relevant files to provision the EC2 instance so it meets all the requirements
 4. Run terraform, plan, apply and make sure the instance is created and that it runs the application
 
-### **Thank you for reading, Tal**
+### **Thank you for reading**
 
 
 
