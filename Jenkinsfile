@@ -50,8 +50,12 @@ pipeline {
                     sh 'sudo docker run -d --name choose-a-song -p 8080:8080 talsvorai/choose-a-song:artifact-${BUILD_NUMBER}'
                     echo "Docker container 'choose-a-song' started successfully"
 
-                    // Stop the Docker container using its ID
-                    sh "sudo docker stop choose-a-song"
+                    // Stop the Docker container
+                    sh 'sudo docker stop choose-a-song'
+                    echo "Docker stopped successfully"
+
+                    // Remove the Docker container
+                    sh 'sudo docker rm choose-a-song'
                     echo "Docker stopped successfully"
                 }
             }
