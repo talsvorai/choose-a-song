@@ -30,7 +30,7 @@ pipeline {
         stage('Maven_Test') {
             steps {
                 script {
-                    echo "This is test stage"
+                    echo "Running test for connection"
                     sh 'sudo mvn test'
                     echo "Test was successful"
                 }
@@ -42,8 +42,9 @@ pipeline {
                 script {
                     echo "Building Docker image"
                     // Build the Docker image
-                    //sh 'sudo docker build -t java-calculator:${BUILD_NUMBER} .'
-                    //echo "Docker image built successfully"
+                    sh 'sudo docker build -t java-calculator:${BUILD_NUMBER} .'
+                    
+                    echo "Docker image built successfully"
                 }
             }
         }
