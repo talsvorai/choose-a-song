@@ -105,11 +105,11 @@ pipeline {
     post {
         success {
             echo 'Build and tests passed successfully!'
-            slackSend(channel: SLACK_CHANNEL, message: "Build ${BUILD_NUMBER} succeeded!", tokenCredentialId: SLACK_TOKEN)
+            slackSend channel: '#devops-alerts', message: 'Successful completion of ${env.JOB_NAME} for build ${env.BUILD_NUMBER}', teamDomain: 'talsvorai', tokenCredentialId: 'real_slack_token'
         }
         failure {
             echo 'Build or tests failed!'
-            slackSend(channel: SLACK_CHANNEL, message: "Build ${BUILD_NUMBER} failed!", tokenCredentialId: SLACK_TOKEN)
+            slackSend channel: '#devops-alerts', message: 'failed completion of ${env.JOB_NAME} for build ${env.BUILD_NUMBER}', teamDomain: 'talsvorai', tokenCredentialId: 'real_slack_token'
         }
     }
 }
