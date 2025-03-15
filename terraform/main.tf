@@ -16,7 +16,7 @@ resource "aws_security_group" "allow_ports" {
   }
 }
 
-resource "aws_instance" "my_instance_test" {
+resource "aws_instance" "my_instance" {
   ami           = "ami-0f65a9eac3c203b54"
   instance_type = var.instance_type
   key_name      = var.key_name
