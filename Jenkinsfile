@@ -43,15 +43,11 @@ pipeline {
                 script {
                     echo "Building Docker image"
                     // Build the Docker image
-                    sh 'sudo docker build -t talsvorai/choose-a-song:artifact-${BUILD_NUMBER} .'
-                    echo "Docker image built successfully"
-
-                    // Run the Docker container in detached mode and capture the container ID
-                    def containerId = sh(script: 'sudo docker run -d -p 8080:8080 talsvorai/choose-a-song:artifact-${BUILD_NUMBER}', returnStdout: true).trim()
-                    echo "Docker container started successfully with ID: ${containerId}"
+                    sh 'sudo docker run -d --name choose-a-song -p 8080:8080 talsvorai/choose-a-song:artifact-${BUILD_NUMBER}'
+                    echo "Docker container 'choose-a-song' started successfully"
 
                     // Stop the Docker container using its ID
-                    sh "sudo docker stop ${containerId}"
+                    sh "sudo docker stop choose-a-song"
                     echo "Docker stopped successfully"
                 }
             }
