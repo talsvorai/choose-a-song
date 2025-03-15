@@ -33,6 +33,6 @@ To run it you must enter a valid url that runs the application.
 3. Create a Jenkinsfile that configures the steps for the CI/CD pipeline.
 4. Install the default plugins and add Maven Integration and Slack Notification Plugin.
 
-*Make sure to configure GitHub, the agent node and the inbound traffic in aws.* 
+*Make sure to configure GitHub, the agent node and the inbound traffic in aws.*
 
 
