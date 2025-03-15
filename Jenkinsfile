@@ -31,12 +31,12 @@ pipeline {
             steps {
                 script {
                     echo "This is test stage"
-                    sh "sudo npm install --save-dev jest"
-                    sh 'sudo npm test'
-                    echo "Tests were successful"
+                    sh 'sudo mvn test'
+                    echo "Test was successful"
                 }
             }
         }
+        
         stage('Docker Build') {
             steps {
                 script {
