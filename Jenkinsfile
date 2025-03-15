@@ -95,8 +95,8 @@ pipeline {
                         sudo docker pull ${DOCKERHUB_CRED_USR}/${APP_NAME}:latest
 
                         echo 'Stopping and removing old container - must be initialized in machine'
-                        sudo docker stop ${APP_NAME} || true
-                        sudo docker rm ${APP_NAME} || true
+                        sudo docker stop ${APP_NAME}
+                        sudo docker rm ${APP_NAME}
 
                         echo 'Running new container...'
                         sudo docker run -d --name ${APP_NAME} -p 8080:8080 ${DOCKERHUB_CRED_USR}/${APP_NAME}:latest"
