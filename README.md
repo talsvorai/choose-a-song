@@ -29,7 +29,7 @@ To run it you must enter a valid url that runs the application.
 
 #### **Checkout the code using git, Package and test the code via Maven**
 1. Make sure Maven and Git are installed in the agent and the paths are configured
-2. Checkout the source code - configure it so the job runs every time a code is pushed into the main branch.
+2. Checkout the source code - configure it so the job runs every time a code is pushed into the main branch. (GitHub webhook)
 3. Create a Jenkinsfile that configures the steps for the CI/CD pipeline.
 4. Install the default plugins and add Maven Integration and Slack Notification Plugin.
 
