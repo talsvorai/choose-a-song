@@ -31,6 +31,7 @@ pipeline {
             steps {
                 script {
                     echo "This is test stage"
+                    sh "sudo npm install --save-dev jest"
                     sh 'sudo npm test'
                     echo "Tests were successful"
                 }
