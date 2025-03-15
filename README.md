@@ -46,7 +46,7 @@ This Spring Boot-based Java web application allows users to select a favorite so
 3. Set up the necessary Terraform configuration files to provision the EC2 instance with all required settings.
 4. Run Terraform with the plan and apply commands to provision the instance and ensure it is created successfully and running the application.
 
-### **Thank you for reading**
+### **Thank you for reading** 
 
 
 
