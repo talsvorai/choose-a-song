@@ -43,6 +43,10 @@ pipeline {
                 script {
                     echo "Building Docker image"
                     // Build the Docker image
+                    sh 'sudo docker build -t talsvorai/choose-a-song:artifact-${BUILD_NUMBER} .'
+                    echo "Docker image built successfully"
+
+                    //Running docker container
                     sh 'sudo docker run -d --name choose-a-song -p 8080:8080 talsvorai/choose-a-song:artifact-${BUILD_NUMBER}'
                     echo "Docker container 'choose-a-song' started successfully"
 
