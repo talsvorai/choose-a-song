@@ -8,6 +8,6 @@ public class SongController {
 
     @GetMapping("/")
     public String home() {
-        return "index";  // Returns the Thymeleaf template (index.html)
+        return "index";  // Returns the template (index.html)
     }
 }
