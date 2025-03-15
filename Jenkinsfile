@@ -65,15 +65,21 @@ pipeline {
         stage('Docker Push') {
             steps {
                 script {
-
                     // Login to Docker Hub using Jenkins credentials
                     sh '''
                     echo ${DOCKERHUB_CRED_PSW} | sudo docker login -u ${DOCKERHUB_CRED_USR} --password-stdin
                     '''
 
                     echo "Pushing Docker image"
-                    // Push the Docker image to Docker Hub
+                    // Push the Docker image to Docker Hub with a build-specific tag
                     sh 'sudo docker push ${DOCKERHUB_CRED_USR}/choose-a-song:artifact-${BUILD_NUMBER}'
+
+                    // Now tag the latest build as 'latest'
+                    echo "Tagging the Docker image as 'latest'"
+                    sh 'sudo docker tag ${DOCKERHUB_CRED_USR}/choose-a-song:artifact-${BUILD_NUMBER} ${DOCKERHUB_CRED_USR}/choose-a-song:latest'
+
+                    // Optionally, push the 'latest' tag to Docker Hub, if you want to keep it up to date
+                    sh 'sudo docker push ${DOCKERHUB_CRED_USR}/choose-a-song:latest'
                 }
             }
         }
@@ -86,14 +92,14 @@ pipeline {
                         sh '''
                         echo "Build number: ${BUILD_NUMBER}"
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no $SSH_USER@13.53.216.126 "echo 'Pulling latest Docker image...'
-                        sudo docker pull ${DOCKERHUB_CRED_USR}/choose-a-song:artifact-${BUILD_NUMBER}
+                        sudo docker pull ${DOCKERHUB_CRED_USR}/choose-a-song:latest
 
                         echo 'Stopping and removing old container - must be initialized in machine'
                         sudo docker stop choose-a-song || true
                         sudo docker rm choose-a-song || true
 
                         echo 'Running new container...'
-                        sudo docker run -d --name choose-a-song -p 8080:8080 ${DOCKERHUB_CRED_USR}/choose-a-song:artifact-${BUILD_NUMBER}"
+                        sudo docker run -d --name choose-a-song -p 8080:8080 ${DOCKERHUB_CRED_USR}/choose-a-song:latest"
                         '''
                     }
                 }
