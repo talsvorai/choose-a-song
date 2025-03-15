@@ -25,7 +25,7 @@ This Spring Boot-based Java web application allows users to select a favorite so
 #### **Checkout the Code, Package, and Test the Code Using Maven**
 1. Ensure that Maven and Git are installed on the agent node and the necessary environment paths are configured.
 2. Checkout the source code and configure the job to trigger automatically whenever a commit is pushed to the main branch (via a GitHub webhook).
-3. Build the JAR file and run tests using Maven. The test should validate the HTTP connection to the application.
+3. Build the JAR file and run tests using Maven. The test validates the HTTP connection to the application.
 
 #### **Build a docker image, test it, and push to DockerHub**
 1. Create a Dockerfile to build a lightweight image that exposes the application on port 8080.
