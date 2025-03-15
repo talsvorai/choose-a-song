@@ -1,51 +1,50 @@
 # choose-a-song
 
-This Java application (Spring Boot) allows you to choose your favourite song (out of three songs) and display it's lyrics on your screen.
-This is a web application that runs via the internet.
+This Spring Boot-based Java web application allows users to select a favorite song from a predefined list of three and display its lyrics. The application is accessible via a web browser.
 
 ## **Steps to set up the application and run it:**  
 
+### **Through a Jenkins CI\CD pipeline:**
+
 #### **Create the source code**  
-1. Create the code in a structure that allows compilation and testing via Maven.
-2. Create a Github repository and upload the source code onto it.
-3. Try running the application locally (using port 8080) and check if the application runs in your browser.
+1. Structure the code to support compilation and testing using Maven.
+2. Create a GitHub repository and upload the source code.
+3. Run the application locally on port 8080 and verify that it opens successfully in a web browser.
 
 #### **Create the pipeline**
-1. Install Java and Docker on an EC2 instance and run a Jenkins image on it. Make it the master node.
-2. Install Java and Docker on an EC2 instance and make it the agent node.
+1. Install Java and Docker on an EC2 instance, then deploy a Jenkins image on it. Configure this instance as the master node.
+2. Install Java and Docker on a separate EC2 instance and designate it as the agent node.
 3. Create a Pipeline job in jenkins
-4. Create a Jenkinsfile that configures the steps for the CI/CD pipeline.
-5. Install the default plugins and add GitHub plugin, Maven Integration and Slack Notification Plugin.
+4. Write a Jenkinsfile to define the steps for the CI/CD pipeline.
+5. Install the default plugins and add: GitHub plugin, Maven Integration and Slack Notification Plugin.
 
-*Make sure to configure GitHub, the agent node and the inbound traffic in aws.*
+#### **Checkout the Code, Package, and Test the Code Using Maven**
+1. Ensure that Maven and Git are installed on the agent node and the necessary environment paths are configured.
+2. Checkout the source code and configure the job to trigger automatically whenever a commit is pushed to the main branch (via a GitHub webhook).
+3. Build the JAR file and run tests using Maven. The test should validate the HTTP connection to the application.
 
-#### **Checkout the code using git, Package and test the code via Maven**
-1. Make sure Maven and Git are installed in the agent and the paths are configured
-2. Checkout the source code - configure it so the job runs every time a code is pushed into the main branch (GitHub webhook).
-3. Build the jar file and test it using maven - the test validates HTTP connection to the application.
-
-#### **Build a docker image, test it and push to DockerHub**
-1. Create a Dockerfile that build a slim image that is exposed on port 8080
-2. Build docker image and test that it runs and stops as expected.  
-3. Upload the image to DockerHub using the relevant credentials.
+#### **Build a docker image, test it, and push to DockerHub**
+1. Create a Dockerfile to build a lightweight image that exposes the application on port 8080.
+2. Build the Docker image and test its functionality to ensure it runs and stops as expected.
+3. Push the image to DockerHub using the appropriate credentials.
 
 #### **Deploy the application via another EC2 instance**
-1. Enter the instance using ssh.
-2. Pull the latesr image from DockerHub.
-3. Run the container while exposing port 8080.
-4. If the pipeline runs successfully (or fails) notify in the appropriate slack channel. 
+1. SSH into the EC2 instance.
+2. Pull the latest Docker image from DockerHub.
+3. Run the Docker container, ensuring port 8080 is exposed.
+4. Upon the pipeline's completion (successful or failed), send a notification to the appropriate Slack channel.
 
-### **At this point the application is up and running**
+#### **At this point the application is up and running**
 
-## **To provision an EC2 instance and run the application on it:**
+### **Through Terraform provisioning:**
 
-#### **Use the image that was built during the pipeline and stored in DockerHub** 
+#### **We use the image that is stored in DockerHub** 
 
-#### **Set another EC2 instance, to create a new instance and run the app in it**  
-1. Install Teraform, and aws-cli onto it.
-2. Make sure the instance has access to the aws environment (aws config)
-3. Set the relevant files to provision the EC2 instance so it meets all the requirements
-4. Run terraform, plan, apply and make sure the instance is created and that it runs the application
+#### **Create a new instance and run the app in it, using a new EC2 instance**  
+1. Install Terraform and AWS CLI on the instance.
+2. Ensure the instance has proper access to the AWS environment by configuring the AWS CLI (aws configure).
+3. Set up the necessary Terraform configuration files to provision the EC2 instance with all required settings.
+4. Run Terraform with the plan and apply commands to provision the instance and ensure it is created successfully and running the application.
 
 ### **Thank you for reading**
 
