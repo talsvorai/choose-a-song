@@ -32,23 +32,152 @@
 </head>
 <body>
     <h1>Choose a Song to View Lyrics</h1>
-    <button onclick="loadSong('Imagine')">Imagine by John Lennon</button>
-    <button onclick="loadSong('Stairway')">Stairway to Heaven by Led Zeppelin</button>
-    <button onclick="loadSong('Strawberry')">Strawberry Fields Forever by The Beatles</button>
+    <button onclick="showSong('Imagine')">Imagine by John Lennon</button>
+    <button onclick="showSong('Stairway to Heaven')">Stairway to Heaven by Led Zeppelin</button>
+    <button onclick="showSong('Strawberry Fields Forever')">Strawberry Fields Forever by The Beatles</button>
     
     <div id="songDetails"></div>
 
     <script>
-        function loadSong(songTitle) {
-            // Fetch the song HTML from another file and load it into the songDetails div
-            fetch(`${songTitle}.html`)
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementById('songDetails').innerHTML = data;
-                })
-                .catch(error => {
-                    document.getElementById('songDetails').innerHTML = 'Error loading song data.';
-                });
+        // Sample data (use your `songs.json` data in practice)
+        const songsData = {
+            "songs": [
+                {
+                    "title": "Imagine",
+                    "artist": "John Lennon",
+                    "lyrics": [
+                        "Imagine there's no heaven",
+                        "It's easy if you try",
+                        "No hell below us",
+                        "Above us, only sky",
+                        "Imagine all the people",
+                        "Livin' for today",
+                        "Ah",
+                        "Imagine there's no countries",
+                        "It isn't hard to do",
+                        "Nothing to kill or die for",
+                        "And no religion, too",
+                        "Imagine all the people",
+                        "Livin' life in peace",
+                        "You",
+                        "You may say I'm a dreamer",
+                        "But I'm not the only one",
+                        "I hope someday you'll join us",
+                        "And the world will be as one",
+                        "Imagine no possessions",
+                        "I wonder if you can",
+                        "No need for greed or hunger",
+                        "A brotherhood of man",
+                        "Imagine all the people",
+                        "Sharing all the world",
+                        "You",
+                        "You may say I'm a dreamer",
+                        "But I'm not the only one",
+                        "I hope someday you'll join us",
+                        "And the world will live as one"
+                    ]
+                },
+                {
+                    "title": "Stairway to Heaven",
+                    "artist": "Led Zeppelin",
+                    "lyrics": [
+                        "There's a lady who's sure all that glitters is gold",
+                        "And she's buying a stairway to Heaven",
+                        "When she gets there she knows, if the stores are all closed",
+                        "With a word she can get what she came for",
+                        "Ooh, ooh, and she's buying a stairway to Heaven",
+                        "There's a sign on the wall, but she wants to be sure",
+                        "'Cause you know sometimes words have two meanings",
+                        "In a tree by the brook, there's a songbird who sings",
+                        "Sometimes all of our thoughts are misgiven",
+                        "Ooh, it makes me wonder",
+                        "Ooh, makes me wonder",
+                        "There's a feeling I get when I look to the West",
+                        "And my spirit is crying for leaving",
+                        "In my thoughts I have seen rings of smoke through the trees",
+                        "And the voices of those who stand looking",
+                        "Ooh, it makes me wonder",
+                        "Ooh, really makes me wonder",
+                        "And it's whispered that soon if we all call the tune",
+                        "Then the piper will lead us to reason",
+                        "And a new day will dawn for those who stand long",
+                        "And the forests will echo with laughter",
+                        "Oh-oh-oh-oh-whoa",
+                        "If there's a bustle in your hedgerow, don't be alarmed now",
+                        "It's just a spring clean for the May queen",
+                        "Yes, there are two paths you can go by, but in the long run",
+                        "There's still time to change the road you're on",
+                        "And it makes me wonder",
+                        "Ohh, whoa",
+                        "Your head is humming, and it won't go, in case you don't know",
+                        "The piper's calling you to join him",
+                        "Dear lady, can you hear the wind blow? And did you know",
+                        "Your stairway lies on the whispering wind?",
+                        "And as we wind on down the road",
+                        "Our shadows taller than our soul",
+                        "There walks a lady we all know",
+                        "Who shines white light and wants to show",
+                        "How everything still turns to gold",
+                        "And if you listen very hard",
+                        "The tune will come to you at last",
+                        "When all are one, and one is all",
+                        "To be a rock and not to roll",
+                        "And she's buying a stairway to Heaven"
+                    ]
+                },
+                {
+                    "title": "Strawberry Fields Forever",
+                    "artist": "The Beatles",
+                    "lyrics": [
+                        "Let me take you down",
+                        "'Cause I'm going to strawberry fields",
+                        "Nothing is real",
+                        "And nothing to get hung about",
+                        "Strawberry fields forever",
+                        "Living is easy with eyes closed",
+                        "Misunderstanding all you see",
+                        "It's getting hard to be someone, but it all works out",
+                        "It doesn't matter much to me",
+                        "Let me take you down",
+                        "'Cause I'm going to strawberry fields",
+                        "Nothing is real",
+                        "And nothing to get hung about",
+                        "Strawberry fields forever",
+                        "No one I think is in my tree",
+                        "I mean, it must be high or low",
+                        "That is, you can't, you know, tune in, but it's alright",
+                        "That is, I think it's not too bad",
+                        "Let me take you down",
+                        "'Cause I'm going to strawberry fields",
+                        "Nothing is real",
+                        "And nothing to get hung about",
+                        "Strawberry fields forever",
+                        "Always, no sometimes, think it's me",
+                        "But you know, I know when it's a dream",
+                        "I think I know, I mean a yes",
+                        "But it's all wrong",
+                        "That is, I think I disagree",
+                        "Let me take you down",
+                        "'Cause I'm going to strawberry fields",
+                        "Nothing is real",
+                        "And nothing to get hung about",
+                        "Strawberry fields forever",
+                        "Strawberry fields forever",
+                        "Strawberry fields forever"
+                    ]
+                }
+            ]
+        };
+
+        function showSong(songTitle) {
+            const song = songsData.songs.find(song => song.title === songTitle);
+            const songDetailsDiv = document.getElementById('songDetails');
+            if (song) {
+                let lyrics = song.lyrics.join('<br>');
+                songDetailsDiv.innerHTML = `<div class="song-title">${song.title} by ${song.artist}</div><div class="lyrics">${lyrics}</div>`;
+            } else {
+                songDetailsDiv.innerHTML = 'Song not found.';
+            }
         }
     </script>
 </body>
