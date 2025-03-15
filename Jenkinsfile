@@ -43,11 +43,11 @@ pipeline {
                 script {
                     echo "Building Docker image"
                     // Build the Docker image
-                    sh 'sudo docker build -t talsvorai/choose-a-song:artifact-${BUILD_NUMBER} .'
+                    sh 'sudo docker build -t ${DOCKERHUB_CRED_USR}/choose-a-song:artifact-${BUILD_NUMBER} .'
                     echo "Docker image built successfully"
 
                     //Running docker container
-                    sh 'sudo docker run -d --name choose-a-song -p 8080:8080 talsvorai/choose-a-song:artifact-${BUILD_NUMBER}'
+                    sh 'sudo docker run -d --name choose-a-song -p 8080:8080 ${DOCKERHUB_CRED_USR}/choose-a-song:artifact-${BUILD_NUMBER}'
                     echo "Docker container 'choose-a-song' started successfully"
 
                     // Stop the Docker container
@@ -72,7 +72,7 @@ pipeline {
 
                     echo "Pushing Docker image"
                     // Push the Docker image to Docker Hub
-                    sh 'sudo docker push talsvorai/choose-a-song:artifact-${BUILD_NUMBER}'
+                    sh 'sudo docker push ${DOCKERHUB_CRED_USR}/choose-a-song:artifact-${BUILD_NUMBER}'
                 }
             }
         }
@@ -85,14 +85,14 @@ pipeline {
                         sh '''
                         echo "Build number: ${BUILD_NUMBER}"
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no $SSH_USER@13.53.216.126 "echo 'Pulling latest Docker image...'
-                        sudo docker pull talsvorai/choose-a-song:artifact-${BUILD_NUMBER}
+                        sudo docker pull ${DOCKERHUB_CRED_USR}/choose-a-song:artifact-${BUILD_NUMBER}
 
                         echo 'Stopping and removing old container - must be initialized in machine'
                         sudo docker stop choose-a-song || true
                         sudo docker rm choose-a-song || true
 
                         echo 'Running new container...'
-                        sudo docker run -d --name choose-a-song -p 8080:8080 talsvorai/choose-a-song:artifact-${BUILD_NUMBER}"
+                        sudo docker run -d --name choose-a-song -p 8080:8080 ${DOCKERHUB_CRED_USR}/choose-a-song:artifact-${BUILD_NUMBER}"
                         '''
                     }
                 }
