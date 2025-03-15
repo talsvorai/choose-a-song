@@ -18,7 +18,7 @@ This Spring Boot-based Java web application allows users to select a favorite so
 #### **Create the pipeline**
 1. Install Java and Docker on an EC2 instance, then deploy a Jenkins image on it. Configure this instance as the master node.
 2. Install Java and Docker on a separate EC2 instance and designate it as the agent node.
-3. Create a Pipeline job in jenkins
+3. Create a Pipeline job in jenkins.
 4. Write a Jenkinsfile to define the steps for the CI/CD pipeline.
 5. Install the default plugins and add: GitHub plugin, Maven Integration and Slack Notification Plugin.
 
