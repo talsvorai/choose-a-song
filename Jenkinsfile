@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKERHUB_CRED = credentials('dockerhub_cred')
         DEPLOY_IP = "13.53.216.126"
+        APP_NAME = "choose-a-song"
     }
 
 
@@ -43,19 +44,19 @@ pipeline {
                 script {
                     echo "Building Docker image"
                     // Build the Docker image
-                    sh 'sudo docker build -t ${DOCKERHUB_CRED_USR}/choose-a-song:artifact-${BUILD_NUMBER} .'
+                    sh 'sudo docker build -t ${DOCKERHUB_CRED_USR}/${APP_NAME}:artifact-${BUILD_NUMBER} .'
                     echo "Docker image built successfully"
 
                     //Running docker container
-                    sh 'sudo docker run -d --name choose-a-song -p 8080:8080 ${DOCKERHUB_CRED_USR}/choose-a-song:artifact-${BUILD_NUMBER}'
-                    echo "Docker container 'choose-a-song' started successfully"
+                    sh 'sudo docker run -d --name ${APP_NAME} -p 8080:8080 ${DOCKERHUB_CRED_USR}/${APP_NAME}:artifact-${BUILD_NUMBER}'
+                    echo "Docker container '${APP_NAME}' started successfully"
 
                     // Stop the Docker container
-                    sh 'sudo docker stop choose-a-song'
+                    sh 'sudo docker stop ${APP_NAME}'
                     echo "Docker stopped successfully"
 
                     // Remove the Docker container
-                    sh 'sudo docker rm choose-a-song'
+                    sh 'sudo docker rm ${APP_NAME}'
                     echo "Docker stopped successfully"
                 }
             }
@@ -71,14 +72,14 @@ pipeline {
 
                     echo "Pushing Docker image"
                     // Push the Docker image to Docker Hub with a build-specific tag
-                    sh 'sudo docker push ${DOCKERHUB_CRED_USR}/choose-a-song:artifact-${BUILD_NUMBER}'
+                    sh 'sudo docker push ${DOCKERHUB_CRED_USR}/${APP_NAME}:artifact-${BUILD_NUMBER}'
 
                     // Now tag the latest build as 'latest'
                     echo "Tagging the Docker image as 'latest'"
-                    sh 'sudo docker tag ${DOCKERHUB_CRED_USR}/choose-a-song:artifact-${BUILD_NUMBER} ${DOCKERHUB_CRED_USR}/choose-a-song:latest'
+                    sh 'sudo docker tag ${DOCKERHUB_CRED_USR}/${APP_NAME}:artifact-${BUILD_NUMBER} ${DOCKERHUB_CRED_USR}/${APP_NAME}:latest'
 
                     // Optionally, push the 'latest' tag to Docker Hub, if you want to keep it up to date
-                    sh 'sudo docker push ${DOCKERHUB_CRED_USR}/choose-a-song:latest'
+                    sh 'sudo docker push ${DOCKERHUB_CRED_USR}/${APP_NAME}:latest'
                 }
             }
         }
@@ -91,14 +92,14 @@ pipeline {
                         sh '''
                         echo "Build number: ${BUILD_NUMBER}"
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no $SSH_USER@${DEPLOY_IP} "echo 'Pulling latest Docker image...'
-                        sudo docker pull ${DOCKERHUB_CRED_USR}/choose-a-song:latest
+                        sudo docker pull ${DOCKERHUB_CRED_USR}/${APP_NAME}:latest
 
                         echo 'Stopping and removing old container - must be initialized in machine'
-                        sudo docker stop choose-a-song || true
-                        sudo docker rm choose-a-song || true
+                        sudo docker stop ${APP_NAME} || true
+                        sudo docker rm ${APP_NAME} || true
 
                         echo 'Running new container...'
-                        sudo docker run -d --name choose-a-song -p 8080:8080 ${DOCKERHUB_CRED_USR}/choose-a-song:latest"
+                        sudo docker run -d --name ${APP_NAME} -p 8080:8080 ${DOCKERHUB_CRED_USR}/${APP_NAME}:latest"
                         '''
                     }
                 }
