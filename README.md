@@ -33,6 +33,7 @@ This is a web application that runs via the internet.
 1. Enter the instance using ssh.
 2. Pull the latesr image from Dockerhub.
 3. Run the container while exposing port 8080.
+4. If the pipeline runs successfully (or fails) notify in the appropriate slack channel. 
 
 ### **At this point the application is up and running**
 
@@ -44,8 +45,9 @@ This is a web application that runs via the internet.
 3. Set the relevant files to provision the EC2 instance so it meets all the requirements
 4. Run terraform, plan, apply and make sure the instance is created and that it runs the application
 
-# Thank you for reading
-# Tal
+# **Thank you for reading**
+
+# **Tal**
 
 
 
