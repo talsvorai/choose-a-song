@@ -88,8 +88,7 @@ pipeline {
                         sudo docker pull talsvorai/choose-a-song:artifact-${BUILD_NUMBER}
 
                         echo 'Stopping and removing old container...'
-                        sudo docker stop choose-a-song || true
-                        sudo docker rm choose-a-song || true
+
 
                         echo 'Running new container...'
                         sudo docker run -d --name choose-a-song -p 8080:8080 talsvorai/choose-a-song:artifact-${BUILD_NUMBER}"
