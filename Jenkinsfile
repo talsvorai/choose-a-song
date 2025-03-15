@@ -44,7 +44,7 @@ pipeline {
                     // Build the Docker image
                     sh 'sudo docker build -t java-calculator:${BUILD_NUMBER} .'
                     echo "Docker image built successfully"
-                    sh 'sudo docker run -p 8080:8080 java-calculator:${BUILD_NUMBER}'
+                    sh 'sudo docker run -d -p 8080:8080 java-calculator:${BUILD_NUMBER}'
                     echo "Docker runs successfully"
                     sh 'sudo docker stop java-calculator:${BUILD_NUMBER}'
                     echo "Docker stopped successfully"
