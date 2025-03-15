@@ -103,9 +103,11 @@ pipeline {
     post {
         success {
             echo 'Build and tests passed successfully!'
+            slackSend(channel: '${slack_id}', message: "Build ${BUILD_NUMBER} succeeded!")
         }
         failure {
             echo 'Build or tests failed!'
+            slackSend(channel: '${slack_id}', message: "Build ${BUILD_NUMBER} failed!")
         }
     }
 }
