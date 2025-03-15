@@ -55,6 +55,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Docker Push') {
+            steps {
+                script {
+                    echo "Pushing Docker image"
+                    sh 'sudo docker push talsvorai/choose-a-song:${BUILD_NUMBER}'
+                }
+            }
+        }
+
     }
 
     post {
