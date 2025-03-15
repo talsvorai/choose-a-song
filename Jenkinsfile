@@ -42,11 +42,11 @@ pipeline {
                 script {
                     echo "Building Docker image"
                     // Build the Docker image
-                    sh 'sudo docker build -t choose-a-song:${BUILD_NUMBER} .'
+                    sh 'sudo docker build -t talsvorai/choose-a-song:${BUILD_NUMBER} .'
                     echo "Docker image built successfully"
 
                     // Run the Docker container in detached mode and capture the container ID
-                    def containerId = sh(script: 'sudo docker run -d -p 8080:8080 choose-a-song:${BUILD_NUMBER}', returnStdout: true).trim()
+                    def containerId = sh(script: 'sudo docker run -d -p 8080:8080 talsvorai/choose-a-song:${BUILD_NUMBER}', returnStdout: true).trim()
                     echo "Docker container started successfully with ID: ${containerId}"
 
                     // Stop the Docker container using its ID
@@ -59,7 +59,9 @@ pipeline {
         stage('Docker Push') {
             steps {
                 script {
+
                     echo "Pushing Docker image"
+                    // Push the Docker image to Docker Hub
                     sh 'sudo docker push talsvorai/choose-a-song:${BUILD_NUMBER}'
                 }
             }
