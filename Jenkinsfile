@@ -87,8 +87,9 @@ pipeline {
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no $SSH_USER@13.53.216.126 "echo 'Pulling latest Docker image...'
                         sudo docker pull talsvorai/choose-a-song:artifact-${BUILD_NUMBER}
 
-                        echo 'Stopping and removing old container...'
-
+                        echo 'Stopping and removing old container - must be initialized in machine'
+                        sudo docker stop choose-a-song || true
+                        sudo docker rm choose-a-song || true
 
                         echo 'Running new container...'
                         sudo docker run -d --name choose-a-song -p 8080:8080 talsvorai/choose-a-song:artifact-${BUILD_NUMBER}"
