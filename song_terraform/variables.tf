@@ -1,12 +1,12 @@
 variable "instance_type" {
   description = "The type of EC2 instance to launch"
   type        = string
-  default     = "t2.micro"
+  default     = "t3.micro"
 }
 
 variable "key_name" {
   description = "The key pair to use for SSH access"
-  type        = string
+  type        = "calculator_key""
 }
 
 variable "docker_image" {
