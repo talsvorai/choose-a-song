@@ -3,32 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Song Selector</title>
+    <title>Song Lyrics</title>
     <style>
-        .song-button {
-            margin: 10px;
-            padding: 10px 20px;
-            font-size: 18px;
-            cursor: pointer;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
         }
-        #song {
-            margin-top: 20px;
+        h1 {
+            text-align: center;
+        }
+        .song-title {
             font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+        .lyrics {
+            margin-top: 10px;
+            font-size: 18px;
+            white-space: pre-wrap;
+        }
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1>Choose a Song</h1>
+    <h1>Choose a Song to View Lyrics</h1>
+    <button onclick="loadSong('Imagine')">Imagine by John Lennon</button>
+    <button onclick="loadSong('Stairway')">Stairway to Heaven by Led Zeppelin</button>
+    <button onclick="loadSong('Strawberry')">Strawberry Fields Forever by The Beatles</button>
     
-    <button class="song-button" onclick="displaySong('Song 1')">Song 1</button>
-    <button class="song-button" onclick="displaySong('Song 2')">Song 2</button>
-    <button class="song-button" onclick="displaySong('Song 3')">Song 3</button>
-
-    <div id="song"></div>
+    <div id="songDetails"></div>
 
     <script>
-        function displaySong(songName) {
-            document.getElementById("song").innerText = "Now Playing: " + songName;
+        function loadSong(songTitle) {
+            // Fetch the song HTML from another file and load it into the songDetails div
+            fetch(`${songTitle}.html`)
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('songDetails').innerHTML = data;
+                })
+                .catch(error => {
+                    document.getElementById('songDetails').innerHTML = 'Error loading song data.';
+                });
         }
     </script>
 </body>
