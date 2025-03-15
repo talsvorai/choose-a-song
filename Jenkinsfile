@@ -31,8 +31,8 @@ pipeline {
             steps {
                 script {
                     echo "This is test stage"
-                    //sh 'sudo npm test'
-                    //echo "Tests were successful"
+                    sh 'sudo npm test'
+                    echo "Tests were successful"
                 }
             }
         }
