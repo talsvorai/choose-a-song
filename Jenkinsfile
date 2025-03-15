@@ -77,18 +77,18 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'deploy_cicd_key_username', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
                     script {
+                        echo "Build number: ${BUILD_NUMBER}"
                         sh '''
-                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no $SSH_USER@13.53.216.126 << 'EOF'
-                            echo "Pulling latest Docker image..."
-                            sudo docker pull talsvorai/choose-a-song:artifact-${BUILD_NUMBER}
+                        echo "Build number: ${BUILD_NUMBER}"
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no $SSH_USER@13.53.216.126 "echo 'Pulling latest Docker image...'
+                        sudo docker pull talsvorai/choose-a-song:artifact-${BUILD_NUMBER}
 
-                            echo "Stopping and removing old container..."
-                            sudo docker stop choose-a-song || true
-                            sudo docker rm choose-a-song || true
+                        echo 'Stopping and removing old container...'
+                        sudo docker stop choose-a-song || true
+                        sudo docker rm choose-a-song || true
 
-                            echo "Running new container..."
-                            sudo docker run -d --name choose-a-song -p 8080:8080 talsvorai/choose-a-song:artifact-${BUILD_NUMBER}
-                        EOF
+                        echo 'Running new container...'
+                        sudo docker run -d --name choose-a-song -p 8080:8080 talsvorai/choose-a-song:artifact-${BUILD_NUMBER}"
                         '''
                     }
                 }
