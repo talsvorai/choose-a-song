@@ -6,24 +6,16 @@ This is a web application that runs via the internet.
 ## **Steps to set up the application and run it:**  
 
 #### **Create the source code**  
-1. Create the code in a structure that allows compilation and testing via Maven .
+1. Create the code in a structure that allows compilation and testing via Maven.
 2. Create a Github repository and upload the source code onto it.
 3. Try running the application locally (using port 8080) and check if the application runs in your browser.
 
 #### **Create the pipeline**
 1. Install Java and Docker on an EC2 instance and run a Jenkins image on it. Make it the master node.
 2. Install Java and Docker on an EC2 instance and make it the agent node.
-3. Create a Jenkinsfile that configures the steps for the CI/CD pipeline.
-4. Install the default plugins and add Maven Integration and Slack Notification Plugin.
-
-*Make sure to configure GitHub, the agent node and the inbound traffic in aws.*
-
-#### **Create the pipeline**
-1. Install Java and Docker on an EC2 instance and run a Jenkins image on it. Make it the master node.
-2. Install Java and Docker on an EC2 instance and make it the agent node.
 3. Create a Pipeline job in jenkins
 4. Create a Jenkinsfile that configures the steps for the CI/CD pipeline.
-4. Install the default plugins and add GitHub plugin, Maven Integration and Slack Notification Plugin.
+5. Install the default plugins and add GitHub plugin, Maven Integration and Slack Notification Plugin.
 
 *Make sure to configure GitHub, the agent node and the inbound traffic in aws.*
 
@@ -35,17 +27,25 @@ This is a web application that runs via the internet.
 #### **Build a docker image, test it and push to Dockerhub**
 1. Create a Dockerfile that build a slim image that is exposed on port 8080
 2. Build docker image and test that it runs and stops as expected.  
-3. Upload the image to Dockerhub using the relevant credentials
+3. Upload the image to Dockerhub using the relevant credentials.
 
 #### **Deploy the application via another EC2 instance**
-1. Enter the instance using ssh
-2. Pull the latesr image from Dockerhub
-3. Run the container while exposing port 8080
+1. Enter the instance using ssh.
+2. Pull the latesr image from Dockerhub.
+3. Run the container while exposing port 8080.
 
-### **At this point you can insert the deployment instance's url (port 8080) and access the application**
+### **At this point the application is up and running**
 
-## **To provision an EC2 instance and run the application on it:** 
+## **To provision an EC2 instance and run the application on it:**
 
+#### **Set another EC2 instance**  
+1. Install Teraform, and aws-cli onto it.
+2. Make sure the instance has access to the aws environment (aws config)
+3. Set the relevant files to provision the EC2 instance so it meets all the requirements
+4. Run terraform, plan, apply and make sure the instance is created and that it runs the application
+
+# Thank you for reading
+# Tal
 
 
 
