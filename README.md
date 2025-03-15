@@ -24,14 +24,14 @@ This is a web application that runs via the internet.
 2. Checkout the source code - configure it so the job runs every time a code is pushed into the main branch (GitHub webhook).
 3. Build the jar file and test it using maven - the test validates HTTP connection to the application.
 
-#### **Build a docker image, test it and push to Dockerhub**
+#### **Build a docker image, test it and push to DockerHub**
 1. Create a Dockerfile that build a slim image that is exposed on port 8080
 2. Build docker image and test that it runs and stops as expected.  
-3. Upload the image to Dockerhub using the relevant credentials.
+3. Upload the image to DockerHub using the relevant credentials.
 
 #### **Deploy the application via another EC2 instance**
 1. Enter the instance using ssh.
-2. Pull the latesr image from Dockerhub.
+2. Pull the latesr image from DockerHub.
 3. Run the container while exposing port 8080.
 4. If the pipeline runs successfully (or fails) notify in the appropriate slack channel. 
 
@@ -39,7 +39,9 @@ This is a web application that runs via the internet.
 
 ## **To provision an EC2 instance and run the application on it:**
 
-#### **Set another EC2 instance**  
+#### **Use the image that was built during the pipeline and stored in DockerHub** 
+
+#### **Set another EC2 instance, to create a new instance and run the app in it**  
 1. Install Teraform, and aws-cli onto it.
 2. Make sure the instance has access to the aws environment (aws config)
 3. Set the relevant files to provision the EC2 instance so it meets all the requirements
