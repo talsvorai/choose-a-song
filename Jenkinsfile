@@ -105,11 +105,11 @@ pipeline {
     post {
         success {
             echo 'Build and tests passed successfully!'
-            slackSend(channel: SLACK_CHANNEL, message: "Build ${BUILD_NUMBER} succeeded!", token: SLACK_TOKEN)
+            slackSend(channel: SLACK_CHANNEL, message: "Build ${BUILD_NUMBER} succeeded!", tokenCredentialId: SLACK_TOKEN)
         }
         failure {
             echo 'Build or tests failed!'
-            slackSend(channel: SLACK_CHANNEL, message: "Build ${BUILD_NUMBER} failed!", token: SLACK_TOKEN)
+            slackSend(channel: SLACK_CHANNEL, message: "Build ${BUILD_NUMBER} failed!", tokenCredentialId: SLACK_TOKEN)
         }
     }
 }
