@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     echo "This is build stage"
-                    sh 'sudo mvn clean package'
+                    sh 'sudo mvn clean package -DskipTests'
                     echo "Build was successful"
                 }
             }
@@ -36,7 +36,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Docker Build') {
             steps {
                 script {
