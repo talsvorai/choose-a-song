@@ -13,5 +13,5 @@ variable "key_name" {
 variable "docker_image" {
   description = "The Docker image to run"
   type        = string
-  default     = "talsvorai/choose-a-song:artifact-1"
+  default     = "talsvorai/choose-a-song:artifact-41"
 }
