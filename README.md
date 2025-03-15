@@ -4,7 +4,7 @@ This Spring Boot-based Java web application allows users to select a favorite so
 
 ## **Steps to set up the application and run it:**  
 
-### **Through a Jenkins CI\CD pipeline:**
+### **Through a CI\CD Jenkins pipeline:**
 
 #### **Create the source code**  
 1. Structure the code to support compilation and testing using Maven.
