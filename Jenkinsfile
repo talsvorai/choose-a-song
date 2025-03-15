@@ -44,9 +44,13 @@ pipeline {
                     // Build the Docker image
                     sh 'sudo docker build -t java-calculator:${BUILD_NUMBER} .'
                     echo "Docker image built successfully"
-                    sh 'sudo docker run -d -p 8080:8080 java-calculator:${BUILD_NUMBER}'
-                    echo "Docker runs successfully"
-                    sh 'sudo docker stop java-calculator:${BUILD_NUMBER}'
+
+                    // Run the Docker container in detached mode and capture the container ID
+                    def containerId = sh(script: 'sudo docker run -d -p 8080:8080 java-calculator:${BUILD_NUMBER}', returnStdout: true).trim()
+                    echo "Docker container started successfully with ID: ${containerId}"
+
+                    // Stop the Docker container using its ID
+                    sh "sudo docker stop ${containerId}"
                     echo "Docker stopped successfully"
                 }
             }
