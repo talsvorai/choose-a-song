@@ -1,7 +1,8 @@
 # choose-a-song
 
 This application allows you to choose your favourite song (out of three songs) and display it's lyrics on your screen.
-To run it you must enter a valid url that runs the application.
+
+This is a web application that runs via the internet.
 
 ## **Steps to set up the application and run it:**  
 
