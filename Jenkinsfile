@@ -5,7 +5,7 @@ pipeline {
         MAVEN_HOME = tool 'Maven' // Assumes Maven is installed and configured in Jenkins
         PATH = "${MAVEN_HOME}/bin:${env.PATH}" //Updating path to use maven
         DOCKERHUB_CRED = credentials('dockerhub_cred')
-        SLACK_TOKEN = credentials('slack-token')
+        SLACK_TOKEN = credentials('slack_token')
     }
 
 
