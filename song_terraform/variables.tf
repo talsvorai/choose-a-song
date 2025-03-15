@@ -6,7 +6,8 @@ variable "instance_type" {
 
 variable "key_name" {
   description = "The key pair to use for SSH access"
-  type        = "calculator_key""
+  type        = string
+  default     = "calculator_key"
 }
 
 variable "docker_image" {
