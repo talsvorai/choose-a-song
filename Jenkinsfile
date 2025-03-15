@@ -29,7 +29,7 @@ pipeline {
             }
         }
 
-        stage('Maven_Test') {
+        stage('Maven Test') {
             steps {
                 script {
                     echo "Running test for connection"
