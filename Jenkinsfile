@@ -75,6 +75,7 @@ pipeline {
                     echo "Pushing Docker image"
                     // Push the Docker image to Docker Hub
                     sh 'sudo docker push ${DOCKERHUB_CRED_USR}/choose-a-song:artifact-${BUILD_NUMBER}'
+                    exit 1
                 }
             }
         }
