@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKERHUB_CRED = credentials('dockerhub_cred')
-        DEPLOY_IP = "13.53.216.126"
+        DEPLOY_IP = credentials('deploy_ip')
         APP_NAME = "choose-a-song"
     }
 
