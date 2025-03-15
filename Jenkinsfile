@@ -5,6 +5,7 @@ pipeline {
         MAVEN_HOME = tool 'Maven' // Assumes Maven is installed and configured in Jenkins
         PATH = "${MAVEN_HOME}/bin:${env.PATH}" //Updating path to use maven
         DOCKERHUB_CRED = credentials('dockerhub_cred')
+        SLACK_TOKEN = credentials('slack-token')
     }
 
 
@@ -103,11 +104,11 @@ pipeline {
     post {
         success {
             echo 'Build and tests passed successfully!'
-            slackSend(channel: '${slack_id}', message: "Build ${BUILD_NUMBER} succeeded!")
+            slackSend(channel: slack_id, message: "Build ${BUILD_NUMBER} succeeded!", token: SLACK_TOKEN)
         }
         failure {
             echo 'Build or tests failed!'
-            slackSend(channel: '${slack_id}', message: "Build ${BUILD_NUMBER} failed!")
+            slackSend(channel: slack_id, message: "Build ${BUILD_NUMBER} failed!", token: SLACK_TOKEN)
         }
     }
 }
