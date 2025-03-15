@@ -44,6 +44,6 @@ resource "aws_instance" "my_instance" {
               EOF
 
   tags = {
-    Name = "MyEC2Instance"
+    Name = "tera_run_app"
   }
 }
