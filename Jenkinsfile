@@ -2,9 +2,8 @@ pipeline {
     agent any
 
     environment {
-        //MAVEN_HOME = tool 'Maven' // Assumes Maven is installed and configured in Jenkins
-        //PATH = "${MAVEN_HOME}/bin:${env.PATH}" //Updating path to use maven
         DOCKERHUB_CRED = credentials('dockerhub_cred')
+        DEPLOY_IP = "13.53.216.126"
     }
 
 
@@ -91,7 +90,7 @@ pipeline {
                         echo "Build number: ${BUILD_NUMBER}"
                         sh '''
                         echo "Build number: ${BUILD_NUMBER}"
-                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no $SSH_USER@13.53.216.126 "echo 'Pulling latest Docker image...'
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no $SSH_USER@${DEPLOY_IP} "echo 'Pulling latest Docker image...'
                         sudo docker pull ${DOCKERHUB_CRED_USR}/choose-a-song:latest
 
                         echo 'Stopping and removing old container - must be initialized in machine'
