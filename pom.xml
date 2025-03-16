@@ -9,10 +9,12 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <!-- Inherits default configurations
+    Provides dependency management for common SB dependencies -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.5</version> <!-- Use a stable version of Spring Boot -->
+        <version>2.7.5</version> 
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -21,19 +23,19 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.7.5</version> <!-- Specify version -->
+            <version>2.7.5</version>
         </dependency>
         <!-- Spring Boot Thymeleaf Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-            <version>2.7.5</version> <!-- Specify version -->
+            <version>2.7.5</version>
         </dependency>
         <!-- Spring Boot Test Starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>2.7.5</version> <!-- Specify version -->
+            <version>2.7.5</version>
             <scope>test</scope>
         </dependency>
         <!-- JUnit 5 -->
@@ -55,7 +57,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.7.5</version> <!-- Specify version -->
+                <version>2.7.5</version>
             </plugin>
         </plugins>
     </build>
