@@ -12,7 +12,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-
                     // Clone the repository from GitHub
                     checkout scm
                 }
@@ -22,7 +21,7 @@ pipeline {
         stage('Maven Build') {
             steps {
                 script {
-                    echo "This is build stage"
+                    echo "Beggining maven build stage..."
                     sh 'sudo mvn clean package -DskipTests'
                     echo "Build was successful"
                 }
@@ -32,7 +31,7 @@ pipeline {
         stage('Maven Test') {
             steps {
                 script {
-                    echo "Running test for connection"
+                    echo "Running test for connection..."
                     sh 'sudo mvn test'
                     echo "Test was successful"
                 }
@@ -42,7 +41,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    echo "Building Docker image"
+                    echo "Building Docker image..."
                     // Build the Docker image
                     sh 'sudo docker build -t ${DOCKERHUB_CRED_USR}/${APP_NAME}:artifact-${BUILD_NUMBER} .'
                     echo "Docker image built successfully"
@@ -54,10 +53,6 @@ pipeline {
                     // Stop the Docker container
                     sh 'sudo docker stop ${APP_NAME}'
                     echo "Docker stopped successfully"
-
-                    // Remove the Docker container
-                    sh 'sudo docker rm ${APP_NAME}'
-                    echo "Docker stopped successfully"
                 }
             }
         }
@@ -65,6 +60,7 @@ pipeline {
         stage('Docker Push') {
             steps {
                 script {
+                    echo "Beggining Docker push stage..."
                     // Login to Docker Hub using Jenkins credentials
                     sh '''
                     echo ${DOCKERHUB_CRED_PSW} | sudo docker login -u ${DOCKERHUB_CRED_USR} --password-stdin
@@ -80,6 +76,7 @@ pipeline {
 
                     // Push the 'latest' tag to Docker Hub
                     sh 'sudo docker push ${DOCKERHUB_CRED_USR}/${APP_NAME}:latest'
+                    echo "Pushed Docker image successfully"
                 }
             }
         }
@@ -88,6 +85,7 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'deploy_cicd_key_username', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
                     script {
+                        echo "Beggining deployment stage..."
                         echo "Build number: ${BUILD_NUMBER}"
                         sh '''
                         echo "Build number: ${BUILD_NUMBER}"
@@ -101,6 +99,7 @@ pipeline {
                         echo 'Running new container...'
                         sudo docker run -d --name ${APP_NAME} -p 8080:8080 ${DOCKERHUB_CRED_USR}/${APP_NAME}:latest"
                         '''
+                        echo "Deployment ran successfully"
                     }
                 }
             }
