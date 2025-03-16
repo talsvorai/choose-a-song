@@ -1,4 +1,4 @@
-package com.example.songselector;
+package com.mytask.songselector;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

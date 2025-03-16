@@ -1,5 +1,5 @@
-//Insuring the class is proberly namespaced
-package com.example.songselector;
+//Insuring the class is properly namespaced
+package com.mytask.songselector;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
